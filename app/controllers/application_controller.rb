@@ -16,11 +16,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/register" do
-    "route good!"
+    erb :register
   end
 
   get "/login" do
     "route good!"
+  end
+
+  post "/home"
+    @user = User.new(name: params[:name], email: params[:email], password: params[:password]
   end
   
 end
