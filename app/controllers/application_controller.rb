@@ -7,6 +7,8 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  enable :sessions
+  set :session_secret, "amadeusamadeus"
   get "/" do
     redirect "/welcome"
   end
