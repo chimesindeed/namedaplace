@@ -23,8 +23,9 @@ class ApplicationController < Sinatra::Base
     "route good!"
   end
 
-  post "/home"
-    @user = User.new(name: params[:name], email: params[:email], password: params[:password]
+  post "/home" do
+    @user = User.create(name: params[:name], email: params[:email], password: params[:password])
+    binding.pry
   end
   
 end
