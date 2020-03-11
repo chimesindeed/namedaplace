@@ -8,7 +8,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    redirect "/welcome"
+  end
+  
+  get "/welcome" do
     erb :welcome
   end
-
 end
