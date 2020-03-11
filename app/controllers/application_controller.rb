@@ -1,4 +1,4 @@
-require './config/environment'
+require './config/environment.rb'
 
 class ApplicationController < Sinatra::Base
 
@@ -14,4 +14,13 @@ class ApplicationController < Sinatra::Base
   get "/welcome" do
     erb :welcome
   end
+
+  get "/register" do
+    "route good!"
+  end
+
+  get "/login" do
+    "route good!"
+  end
+  
 end
