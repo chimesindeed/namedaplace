@@ -5,25 +5,23 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-  end
 
-  enable :sessions
-  set :session_secret, "amadeusamadeus"
+    enable :sessions
+    set :session_secret, "amadeusamadeus"
+  end
+  
   get "/" do
     redirect "/welcome"
   end
   
   get "/welcome" do
-    erb :welcome
+    erb :"welcome.html"
   end
 
   get "/register" do
-    erb :register
+    erb :"sessions/register.html"
   end
 
-  get "/login" do
-    "route good!"
-  end
 
   post "/home" do
     @user = User.create(name: params[:name], email: params[:email], password: params[:password])
