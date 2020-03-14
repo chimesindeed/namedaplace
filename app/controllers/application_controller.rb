@@ -1,4 +1,4 @@
-require './config/environment.rb'
+require_relative '../../config/environment.rb'
 
 class ApplicationController < Sinatra::Base
 
@@ -6,37 +6,11 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
 
-    enable :sessions
+    enable :sessions #needed for session authentification
     set :session_secret, "amadeusamadeus"
   end
-  
-  helpers do
-    
-    def logged_in?
-      !!current_user
-    end
-    
-    def current_user
-      @user ||= User.find_by(:email => session[:email]) if session[:email]
-    end
-    
-    def login(email, password)
-      #check if a user with this email actually exits
-      #if so, set the session
-      #otherwise redirect
-      user = User.find_by(:email => email)
-      if user && user.authenticate(password)
-        session[:email] = user.email
-      else redirect '/login'
-      end
-    end
-    
-    def logout!
-      redirect '/welcome'
-    end
-    
-  end
 
+  
   get '/' do
     redirect "/welcome"
   end
