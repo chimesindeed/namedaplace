@@ -5,7 +5,9 @@ class PlacesController < ApplicationController
     if !logged_in?
       redirect to "/login" #redirecting if not
     else
-    @places = Place.all
+    @places = Place.all.select do |place|
+      place.user_id == current_user[:id]
+    end
     erb :"/places/places.html"
     end
   end
@@ -24,33 +26,38 @@ class PlacesController < ApplicationController
     if !logged_in?
       redirect to "/login" #redirecting if not|id|
     else
-    @place = Place.find(id.to_i)
-    erb :"show_place"
+      @place = Place.find(params[:id].to_i)
+      if @place.user_id==current_user.id
+        erb :"places/show_place.html"
+      else
+        redirect to "/login"
+      end
     end
   end
+  
   get '/places/:id/edit' do
-    
-    #checking if they are logged in
-    if !logged_in?
+    if !logged_in? #checking if they are logged
       redirect to"/login" #redirecting if not
     else
-      #place associated only with user that created it
-      place = current_user.places.find(params[:id])
+      @place = Place.find(params[:id].to_i)
+      if @place.user_id==current_user.id
+        erb :"places/edit_place.html"
+      else redirect to '/'
       
-      "An edit place form #{current_user.id} is editing #{place.id}"
-      erb :"edit_place"
-    end
+      end
+  end
   end
   
   post '/places' do
-    create_place
-    redirect to("/places/#{@places.id}")
+    binding.pry
+    Place.create(name: params[:name], notes: params[:notes])
+    redirect to("/places")
   end
   
-  put '/places/:id' do
-    place = find_place
-    place.update(params[:place])
-    redirect to("/places/#{place.id}")
+  put '/places/:id' do |id|
+    @place = Place.find(params[:id].to_i)
+    @place.update(params[:place])
+    redirect to("/places")
   end
   
   delete '/places/:id' do
