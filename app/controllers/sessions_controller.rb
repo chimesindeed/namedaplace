@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   post '/sessions' do
     login(params[:email], params[:password])
     @places = Place.all
-    erb :"/places/index.html"
+    redirect to "/places"
+
     
   end
 

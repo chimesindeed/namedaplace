@@ -1,29 +1,38 @@
 class PlacesController < ApplicationController
   
   get '/places' do
-    @places = Place.all
-    erb :"places.html"
-  end
-
-  get '/places/new' do
     #checking if they are logged in
     if !logged_in?
-      redirect "/login" #redirecting if not
+      redirect to "/login" #redirecting if not
     else
-      @places = Place.all
-      erb :"new_place.html"
+    @places = Place.all
+    erb :"/places/places.html"
     end
   end
   
-  get '/places/:id' do |id|
-    @place = Place.find(id.to_i)
-    erb :"show_place"
-  end
-  
-  get '/places/:id/edit' do
+  get '/places/new' do
     #checking if they are logged in
     if !logged_in?
-      redirect "/login" #redirecting if not
+      redirect to "/login" #redirecting if not
+    else
+      @places = Place.all
+      erb :"/places/new_place.html"
+    end
+  end
+  
+  get '/places/:id' do  #checking if they are logged in
+    if !logged_in?
+      redirect to "/login" #redirecting if not|id|
+    else
+    @place = Place.find(id.to_i)
+    erb :"show_place"
+    end
+  end
+  get '/places/:id/edit' do
+    
+    #checking if they are logged in
+    if !logged_in?
+      redirect to"/login" #redirecting if not
     else
       #place associated only with user that created it
       place = current_user.places.find(params[:id])
@@ -48,8 +57,5 @@ class PlacesController < ApplicationController
     find_place.destroy
     redirect to('/places')
   end
-  
-  
-  
  
 end

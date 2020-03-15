@@ -32,20 +32,9 @@ class ApplicationController < Sinatra::Base
 
     def logout!
       session.clear
-      redirect to '/welcome'
+      redirect to '/'
     end
 
-    def find_places
-      @places = Place.all
-    end
-    
-    def find_place
-      @place = Place.get(params[:id])
-    end
-    
-    def create_place
-      @place = Place.create(params[:place])
-    end
   end
   
   get '/' do
@@ -56,4 +45,7 @@ class ApplicationController < Sinatra::Base
     erb :"/general/about.html"
   end
   
+  get '/logout' do
+    logout!
+  end
 end
