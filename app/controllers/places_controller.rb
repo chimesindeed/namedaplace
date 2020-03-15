@@ -49,8 +49,7 @@ class PlacesController < ApplicationController
   end
   
   post '/places' do
-    binding.pry
-    Place.create(name: params[:name], notes: params[:notes])
+    current_user.places.create(name: params[:name], notes: params[:notes])
     redirect to("/places")
   end
   
@@ -61,7 +60,7 @@ class PlacesController < ApplicationController
   end
   
   delete '/places/:id' do
-    find_place.destroy
+    Place.find_by(:id => params[:id]).destroy
     redirect to('/places')
   end
  

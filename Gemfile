@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'sinatra'
+gem 'sinatra', :require => 'sinatra/base'
 gem 'activerecord', '~> 4.2', '>= 4.2.6', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'rake'
@@ -11,7 +11,6 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
-
 group :test do
   gem 'rspec'
   gem 'capybara'
