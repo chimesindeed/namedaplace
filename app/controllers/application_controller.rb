@@ -1,7 +1,5 @@
 require_relative '../../config/environment.rb'
-
 class ApplicationController < Sinatra::Base
-  
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -10,7 +8,6 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "amadeusamadeus"
 
   end
-
   helpers do
   
     def login(email, password)
@@ -38,27 +35,25 @@ class ApplicationController < Sinatra::Base
       redirect to '/welcome'
     end
 
+    def find_places
+      @places = Place.all
+    end
+    
+    def find_place
+      @place = Place.get(params[:id])
+    end
+    
+    def create_place
+      @place = Place.create(params[:place])
+    end
   end
   
   get '/' do
-    erb :"home.html"
+    erb :"/general/home.html"
   end
   
   get '/about' do
-    erb :"about.html"
+    erb :"/general/about.html"
   end
-
-  get '/signup' do
-    erb :"users/new.html"
-  end
-  
-  get '/login' do
-    erb :"login.html"
-  end
-
-  #post "/create_user" do
-   # @new_user= User.create(name: params[:name], email: #params[:email], password: params[:password])
-    #post '/sessions'
-    #end
   
 end

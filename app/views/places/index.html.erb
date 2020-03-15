@@ -1,0 +1,7 @@
+<h1>All Places</h1>
+
+<% @places.each do |place| %>
+
+<h3><%= place.id%>: <a href="/places/<%= place.id %>"><%= place.name %></a></h3>
+<a href="/tasks/<%= place.id %>/edit">Edit</a> <% end %> <br> <a
+href="/places/new">New Place</a>

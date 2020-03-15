@@ -4,6 +4,10 @@ class UsersController < ApplicationController
     erb :"users/new.html"
   end
   
+   get '/login' do
+    erb :"login/login.html"
+  end
+  
   post '/users' do
       @user = User.new
       @user.email = params[:email]
