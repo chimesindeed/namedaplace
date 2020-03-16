@@ -1,10 +1,15 @@
 <form action="/places/<%=@place.id%>" method="post">
+  
   <input type="hidden" name="_method" value="put"
+  
   <h2>Edit Place</h2>
+
   <h3> Place: </h3>
-  <input type="text" name="place[name]" value="<%=@place.name%>"/>
+    <input type="text" name="place[name]" value="<%=@place.name%>"/>
+  
   <h3> Notes: </h3>
-  <textarea name='place[notes]' rows='10' columns='40'><%=@place.notes%></textarea>
-  <input type='submit' value='Update'/>
+    <textarea name='place[notes]' rows='10' columns='40'><%=@place.notes%></textarea>
+  
+<input type='submit' value='Update'/>
   
   

@@ -1,14 +1,17 @@
 <h1>All Places</h1>
 
-<% @places.each do |place| %>
-  <h3><a href="/places/<%= place.id %>"><%= place.name %></a></h3>
+  <% @places.each do |place| %>
+    <h3><a href="/places/<%= place.id %>"><%= place.name %></a></h3>
 
-  <a href="/places/<%=place.id%>/edit">Edit</a>
-  <form action = "/places/<%= place.id %>" method= "post">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete">
+      <a href="/places/<%=place.id%>/edit">Edit</a>
+  
+    <form action = "/places/<%= place.id %>" method= "post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete">
     </form>
-<%end%>
+  <%end%>
+  
 <br>
 <br>
-<a href="/places/new">New Place</a>
+
+  <a href="/places/new">New Place</a>
